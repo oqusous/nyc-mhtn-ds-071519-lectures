@@ -1,0 +1,106 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[38]:
+
+
+import numpy as np
+
+class Calculator:
+    
+    def __init__(self, data):
+        self.data = data
+        self.update_data() 
+
+        
+    def update_data(self): 
+        self.length = len(self.data)
+        self.mean = self.__calc_mean()
+        self.median = self.__calc_median()
+        self.variance = self.__calc_var()
+        self.standev = self.__calc_std()
+        
+        
+    def __repr__(self):
+        return self
+        
+        
+#for mean create a function for it too read
+       
+    def __calc_mean(self):
+        mean = sum(self.data)/len(self.data)
+        return mean
+#     returns the mean of the list 
+
+    def __calc_median(self):
+        sorted_data = sorted(self.data)
+        length = int(len(sorted_data))
+        half_length = int(len(sorted_data)*0.5) 
+        integer = int((half_length)+0.5)
+        if length % 2 == 0:
+            median = (sorted_data[half_length]+sorted_data[half_length-1])/2
+        else:
+            median = sorted_data[integer]
+        return median
+#     to calculate the median of the list.
+    
+    def __calc_var(self):
+        variance = np.var(self.data)
+        return variance
+#     to calculate the variance from the mean and length of the list.
+
+    def __calc_std(self):
+        std = np.std(self.data)
+        return std
+#     to calculate the standard deviation of the variance
+
+    def add_data(self, new_data):
+        self.data.extend(new_data)
+        self.update_data()
+        
+    def remove_data(self, old_data):
+        self.data.remove(old_data)
+        self.update_data()
+
+
+# In[65]:
+
+
+test = Calculator([2,3,4,6,7,8,10,40,40])
+
+
+# In[66]:
+
+
+test.data
+
+
+# In[67]:
+
+
+test.standev
+
+
+# In[68]:
+
+
+test.remove_data(40)
+
+
+# In[69]:
+
+
+test.data
+
+
+# In[64]:
+
+
+test.standev
+
+
+# In[ ]:
+
+
+
+
